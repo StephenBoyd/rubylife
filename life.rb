@@ -15,16 +15,16 @@ $width.times do |x|
 end
 
 def print_grid (grid)
-  buffer = ""
+  buffer = "\033[42m"
   40.times {buffer << "\n"}
   buffer << "generation: #{$generation} \n"
   $height.times do |y|
     $width.times do |x|
-      buffer << (grid[[x, y]] == true ? "█" : ".")
+      buffer << (grid[[x, y]] == true ? "█" : " ")
     end
     buffer << "\n"
   end
-  puts buffer
+  puts buffer << "\033[0m"
 end
 
 def generate (source, target)
