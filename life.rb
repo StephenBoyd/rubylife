@@ -10,7 +10,7 @@ $grid1 = Hash.new
 $grid2 = Hash.new
 $width.times do |x|
   $height.times do |y|
-    $grid1[[x, y]]= [true, false].sample
+    $grid1[[x, y]]= [true, false].choice
   end
 end
 
