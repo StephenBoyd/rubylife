@@ -60,5 +60,5 @@ print_grid $grid1
 
 while true do
   iterate
-  sleep 0.5
+  sleep 0.2
 end
