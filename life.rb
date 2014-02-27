@@ -1,3 +1,7 @@
+#!/bin/env ruby
+# encoding: utf-8
+
+# Conway's Game of Life by Stephen Boyd
 $generation = 0
 $width = 60
 $height = 30
@@ -16,7 +20,7 @@ def print_grid (grid)
   buffer << "generation: #{$generation} \n"
   $height.times do |y|
     $width.times do |x|
-      buffer << (grid[[x, y]] == true ? "X" : ".")
+      buffer << (grid[[x, y]] == true ? "█" : ".")
     end
     buffer << "\n"
   end
