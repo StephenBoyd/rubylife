@@ -5,9 +5,9 @@
 $generation = 0
 $width = 60
 $height = 30
-
 $grid1 = Hash.new
 $grid2 = Hash.new
+
 $width.times do |x|
   $height.times do |y|
     $grid1[[x, y]]= (rand(2) == 1 ? true : false)
@@ -15,7 +15,7 @@ $width.times do |x|
 end
 
 def print_grid (grid)
-  buffer = "\033[42m"
+  buffer = "\033[42m" #ANSI code for green color
   40.times {buffer << "\n"}
   buffer << "generation: #{$generation} \n"
   $height.times do |y|
