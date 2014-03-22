@@ -62,7 +62,6 @@ print_grid $grid1
 
 100.times do
   iterate
-  sleep 0.2
 end
 
 print_grid $grid2
