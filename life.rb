@@ -8,8 +8,8 @@ $height = 30
 $grid1 = Hash.new
 $grid2 = Hash.new
 
-$width.times do |x|
-  $height.times do |y|
+($width+1).times do |x|
+  ($height+1).times do |y|
     $grid1[[x, y]]= (rand(2) == 1 ? true : false)
   end
 end
