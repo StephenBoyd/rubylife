@@ -5,14 +5,18 @@
 $generation = 0
 $width = 60
 $height = 30
-$grid1 = Hash.new
-$grid2 = Hash.new
+$grid1 = Array.new($width+1).map!{Array.new($height+1, false)}
+$grid2 = Array.new($width+1).map!{Array.new($height+1, false)}
 
-($width+1).times do |x|
-  ($height+1).times do |y|
-    $grid1[[x, y]]= (rand(2) == 1 ? true : false)
+def init
+  ($width).times do |x|
+    ($height).times do |y|
+      $grid1[x][y] = (rand(2) == 1 ? true : false)
+    end
   end
 end
+
+init
 
 def print_grid (grid)
   buffer = "\033[42m" #ANSI code for green color
@@ -20,7 +24,7 @@ def print_grid (grid)
   buffer << "generation: #{$generation} \n"
   $height.times do |y|
     $width.times do |x|
-      buffer << (grid[[x, y]] == true ? "█" : " ")
+      buffer << (grid[x][y] == true ? "█" : " ")
     end
     buffer << "\n"
   end
@@ -31,19 +35,19 @@ def generate (source, target)
   $height.times do |y|
     $width.times do |x|
       live_neighbors = 0
-      live_neighbors += 1 if source[[(x-1),(y-1)]] == true
-      live_neighbors += 1 if source[[(x),(y-1)]] == true
-      live_neighbors += 1 if source[[(x+1),(y-1)]] == true
-      live_neighbors += 1 if source[[(x-1),(y)]] == true
-      live_neighbors += 1 if source[[(x+1),(y)]] == true
-      live_neighbors += 1 if source[[(x-1),(y+1)]] == true
-      live_neighbors += 1 if source[[(x),(y+1)]] == true
-      live_neighbors += 1 if source[[(x+1),(y+1)]] == true
-      target[[x, y]] = false
-      if source[[x, y]] == true then
-        target[[x, y]]= true if (live_neighbors == 2 || live_neighbors == 3)
+      live_neighbors += 1 if source[x-1][y-1] == true
+      live_neighbors += 1 if source[x][y-1] == true
+      live_neighbors += 1 if source[x+1][y-1] == true
+      live_neighbors += 1 if source[x-1][y] == true
+      live_neighbors += 1 if source[x+1][y] == true
+      live_neighbors += 1 if source[x-1][y+1] == true
+      live_neighbors += 1 if source[x][y+1] == true
+      live_neighbors += 1 if source[x+1][y+1] == true
+      target[x][y] = false
+      if source[x][y] == true then
+        target[x][y]= true if (live_neighbors == 2 || live_neighbors == 3)
       else
-        target[[x, y]]= true if live_neighbors == 3
+        target[x][y]= true if live_neighbors == 3
       end
     end
   end
@@ -58,6 +62,7 @@ def iterate
   end
 end
 
+
 print_grid $grid1
 
 100.times do
@@ -65,3 +70,4 @@ print_grid $grid1
 end
 
 print_grid $grid2
+
