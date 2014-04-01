@@ -57,16 +57,19 @@ end
 def iterate
   if $generation % 2 == 0 then
     generate $grid1, $grid2
+    print_grid $grid2
   else
     generate $grid2, $grid1
+    print_grid $grid1
   end
 end
 
 
 print_grid $grid1
 
-100.times do
+while true do
   iterate
+  sleep 0.4
 end
 
 print_grid $grid2
